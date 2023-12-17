@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../apps/futilitap/futilitap/public/js/address_query_filters.js"],
+  "sourcesContent": ["// Description: Query filters for Address doctype.\n// Author: Ismail Tabtabai\n// Version: 0.0.1\n// Last Update: 2023-12-17\n\n\nfrappe.ui.form.on('Address', {\n    country: function(frm) {\n        // Reset fields when country is changed.\n        frm.set_value(\"city\", \"\");\n        frm.set_value(\"county\", \"\");\n        frm.set_value(\"state\", \"\");\n        frm.set_value(\"pincode\", \"\");\n\n        // Both City & State fields need to be filtered by Country field\n        function set_common_query(field_name) {\n            frm.set_query(field_name, function() {\n                return {\n                    \"filters\": {\n                        \"country\": frm.doc.country\n                    }\n                };\n            });\n        }\n        // Filter City and Governorate fields based on Country field\n        set_common_query(\"city\");\n        set_common_query(\"county\");\n        set_common_query(\"state\");\n    },\n});"],
+  "mappings": ";;AAMA,SAAO,GAAG,KAAK,GAAG,WAAW;AAAA,IACzB,SAAS,SAAS,KAAK;AAEnB,UAAI,UAAU,QAAQ,EAAE;AACxB,UAAI,UAAU,UAAU,EAAE;AAC1B,UAAI,UAAU,SAAS,EAAE;AACzB,UAAI,UAAU,WAAW,EAAE;AAG3B,eAAS,iBAAiB,YAAY;AAClC,YAAI,UAAU,YAAY,WAAW;AACjC,iBAAO;AAAA,YACH,WAAW;AAAA,cACP,WAAW,IAAI,IAAI;AAAA,YACvB;AAAA,UACJ;AAAA,QACJ,CAAC;AAAA,MACL;AAEA,uBAAiB,MAAM;AACvB,uBAAiB,QAAQ;AACzB,uBAAiB,OAAO;AAAA,IAC5B;AAAA,EACJ,CAAC;",
+  "names": []
+}
