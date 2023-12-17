@@ -6,6 +6,33 @@ app_email = "ismail@tabtabai.org"
 app_license = "cc0-1.0"
 # required_apps = []
 
+# Fixtures
+fixtures = [
+    "FUA City",
+    "FUA County",
+    "FUA State",
+    {
+        "dt": "Property Setter",
+        "filters": [
+            [
+                "name",
+                "in",
+                [
+                    "Address-city-fieldtype",
+                    "Address-county-fieldtype",
+                    "Address-state-fieldtype",
+                    "Address-city-options",
+                    "Address-county-options",
+                    "Address-state-options",
+                    "Address-city-in_standard_filter",
+                    "Address-main-field_order",
+                ]
+            ]
+        ]
+    },
+]
+
+
 # Includes in <head>
 # ------------------
 
