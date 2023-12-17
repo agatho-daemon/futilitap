@@ -31,12 +31,13 @@
    "label": "Series",
    "no_copy": 1,
    "options": "STATE-\nPROV-\nGOVR-",
-   "set_only_once": 1
+   "set_only_once": 1,
+   "sort_options": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 11:44:51.303007",
+ "modified": "2023-12-17 12:25:56.117807",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA State",

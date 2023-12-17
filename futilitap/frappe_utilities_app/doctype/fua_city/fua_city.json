@@ -59,12 +59,13 @@
    "label": "Series",
    "no_copy": 1,
    "options": "CTY-\nTWN-\nDST-",
-   "set_only_once": 1
+   "set_only_once": 1,
+   "sort_options": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 11:45:09.463214",
+ "modified": "2023-12-17 12:26:37.542622",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA City",

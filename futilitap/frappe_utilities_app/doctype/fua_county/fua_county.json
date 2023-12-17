@@ -30,12 +30,13 @@
    "label": "Series",
    "no_copy": 1,
    "options": "CNTY-\nMUNI-",
-   "set_only_once": 1
+   "set_only_once": 1,
+   "sort_options": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 11:45:21.870356",
+ "modified": "2023-12-17 12:26:26.552651",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA County",
