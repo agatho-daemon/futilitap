@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2023-12-17 10:25:10.466294",
@@ -35,7 +36,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 11:09:51.768174",
+ "modified": "2023-12-17 11:44:51.303007",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA State",
