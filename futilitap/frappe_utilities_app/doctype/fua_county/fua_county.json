@@ -9,7 +9,8 @@
  "field_order": [
   "naming_series",
   "county_name",
-  "county_abbreviation"
+  "county_abbreviation",
+  "country"
  ],
  "fields": [
   {
@@ -32,11 +33,17 @@
    "options": "CNTY-\nMUNI-",
    "set_only_once": 1,
    "sort_options": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Country"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 12:26:26.552651",
+ "modified": "2023-12-17 17:05:32.990052",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA County",
