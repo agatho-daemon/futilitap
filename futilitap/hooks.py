@@ -8,9 +8,7 @@ app_license = "cc0-1.0"
 
 # Fixtures
 fixtures = [
-    "FUA City",
-    "FUA County",
-    "FUA State",
+    # Property Setters
     {
         "dt": "Property Setter",
         "filters": [
