@@ -3,6 +3,7 @@
 // Version: 0.0.1
 // Last Update: 2023-12-17
 
+frappe.provide('frappe.ui.form');
 
 frappe.ui.form.on('Address', {
     country: function(frm) {
