@@ -25,26 +25,30 @@
   // ../futilitap/futilitap/public/js/contact_qentry.js
   frappe.provide("frappe.ui.form");
   frappe.ui.form.ContactQEntry = class ContactQEntry extends frappe.ui.form.QuickEntryForm {
-    constructor(doctype, after_insert, init_callback, doc, force) {
-      super(doctype, after_insert, init_callback, doc, force);
-      this.skip_redirect_on_error = true;
-    }
     render_dialog() {
       this.mandatory = this.mandatory.concat(this.get_variant_fields());
       super.render_dialog();
-    }
-    insert() {
-      const map_field_names = {
-        "email_address": "email_id",
-        "mobile_number": "mobile_no"
+      this.dialog.fields_dict.country.df.onchange = () => {
+        this.country_changed();
       };
-      Object.entries(map_field_names).forEach(([fieldname, new_fieldname]) => {
-        this.dialog.doc[new_fieldname] = this.dialog.doc[fieldname];
-        delete this.dialog.doc[fieldname];
-      });
-      return super.insert();
+      this.dialog.fields_dict["city"].get_query = () => {
+        let country = this.dialog.get_value("country");
+        return {
+          filters: { "country": country }
+        };
+      };
+      this.dialog.fields_dict.city.df.onchange = () => {
+        let cityName = this.dialog.get_value("city");
+        if (cityName) {
+          frappe.db.get_doc("FUA City", cityName).then((city) => {
+            if (city && city.state) {
+              this.dialog.set_value("state", city.state);
+            }
+          });
+        }
+      };
     }
-    get_variant_fields() {
+    get_variant_fields(dialogInstance) {
       var variant_fields = [
         {
           fieldtype: "Section Break",
@@ -92,17 +96,20 @@
           label: __("Country"),
           fieldname: "country",
           fieldtype: "Link",
-          options: "Country"
+          options: "Country",
+          default: frappe.sys_defaults.country
         },
         {
           label: __("City"),
           fieldname: "city",
-          fieldtype: "Data"
+          fieldtype: "Link",
+          options: "FUA City"
         },
         {
           label: __("State"),
           fieldname: "state",
-          fieldtype: "Data"
+          fieldtype: "Link",
+          options: "FUA State"
         },
         {
           label: __("Customer POS Id"),
@@ -113,7 +120,19 @@
       ];
       return variant_fields;
     }
+    country_changed() {
+      this.resetFieldsToBlank(["city", "state"]);
+    }
+    resetFieldsToBlank(fieldNames) {
+      if (this.dialog) {
+        fieldNames.forEach((fieldName) => {
+          if (this.dialog.fields_dict[fieldName]) {
+            this.dialog.set_value(fieldName, "");
+          }
+        });
+      }
+    }
   };
   frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.ContactQEntry;
 })();
-//# sourceMappingURL=futilitap.bundle.RUJ2KNKW.js.map
+//# sourceMappingURL=futilitap.bundle.WEGWFLNW.js.map
