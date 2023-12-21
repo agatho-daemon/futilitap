@@ -56,6 +56,11 @@ app_include_js = "futilitap.bundle.js"
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+# NOTE: includes quick entry from list view
+# doctype_list_js = {
+# "Customer": "public/js/contact_qentry.js",
+# }
+
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 

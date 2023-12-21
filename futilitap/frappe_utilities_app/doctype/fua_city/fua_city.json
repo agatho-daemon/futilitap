@@ -13,7 +13,9 @@
   "county",
   "state",
   "territory",
-  "country"
+  "country",
+  "title",
+  "state_abbreviation"
  ],
  "fields": [
   {
@@ -61,11 +63,25 @@
    "options": "CTY-\nTWN-\nDST-",
    "set_only_once": 1,
    "sort_options": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Read Only",
+   "hidden": 1,
+   "label": "Title",
+   "options": "{city_name}, {state_abbreviation}"
+  },
+  {
+   "fetch_from": "state.state_abbreviation",
+   "fieldname": "state_abbreviation",
+   "fieldtype": "Read Only",
+   "hidden": 1,
+   "label": "State Abbreviation"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 12:26:37.542622",
+ "modified": "2023-12-21 08:42:51.325300",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA City",
@@ -89,5 +105,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "city_name"
+ "title_field": "title"
 }
