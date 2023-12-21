@@ -67,6 +67,7 @@
   {
    "fieldname": "title",
    "fieldtype": "Read Only",
+   "hidden": 1,
    "label": "Title",
    "options": "{city_name}, {state_abbreviation}"
   },
@@ -80,7 +81,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-20 15:44:28.679075",
+ "modified": "2023-12-21 08:42:51.325300",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA City",
