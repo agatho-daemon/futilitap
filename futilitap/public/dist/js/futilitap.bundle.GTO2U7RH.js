@@ -3,22 +3,43 @@
   frappe.provide("frappe.ui.form");
   frappe.ui.form.on("Address", {
     country: function(frm) {
-      frm.set_value("city", "");
-      frm.set_value("county", "");
-      frm.set_value("state", "");
-      frm.set_value("pincode", "");
+      if (!frm.doc.country) {
+        ["city", "county", "state", "pincode"].forEach((field) => {
+          frm.set_value(field, "");
+        });
+        return;
+      }
+      ["city", "county", "state", "pincode"].forEach((field) => {
+        frm.trigger(field);
+      });
       function set_common_query(field_name) {
         frm.set_query(field_name, function() {
           return {
-            "filters": {
+            filters: {
               "country": frm.doc.country
             }
           };
         });
       }
-      set_common_query("city");
-      set_common_query("county");
-      set_common_query("state");
+      ["city", "county", "state"].forEach(set_common_query);
+    },
+    city: function(frm) {
+      if (!frm.doc.city) {
+        frm.set_value("state", "");
+        return;
+      }
+      frappe.db.get_value("FUA City", { "name": frm.doc.city }, "state").then((r) => {
+        if (r && r.message && r.message.state) {
+          frm.set_value("state", r.message.state);
+        } else {
+          frappe.msgprint(__("State not found for city {0}", frm.doc.city));
+          frm.set_value("state", "");
+        }
+      }).catch((err) => {
+        frm.set_value("state", "");
+        frappe.msgprint(__("Error fetching city details: {0}", err));
+        console.error("Error fetching city {0} details: ", frm.doc.city, err);
+      });
     }
   });
 
@@ -33,22 +54,33 @@
       };
       this.dialog.fields_dict["city"].get_query = () => {
         let country = this.dialog.get_value("country");
+        if (!country) {
+          frappe.msgprint(__("Please select a country first."));
+          return;
+        }
         return {
           filters: { "country": country }
         };
       };
       this.dialog.fields_dict.city.df.onchange = () => {
         let cityName = this.dialog.get_value("city");
-        if (cityName) {
-          frappe.db.get_doc("FUA City", cityName).then((city) => {
-            if (city && city.state) {
-              this.dialog.set_value("state", city.state);
-            }
-          });
+        if (!cityName) {
+          this.dialog.set_value("state", "");
+          return;
         }
+        frappe.db.get_doc("FUA City", cityName).then((city) => {
+          if (city && city.state) {
+            this.dialog.set_value("state", city.state);
+          } else {
+            this.dialog.set_value("state", "");
+            frappe.msgprint(__("State information not available for the selected city."));
+          }
+        }).catch(() => {
+          frappe.msgprint(__("Failed to fetch details for the selected city."));
+        });
       };
     }
-    get_variant_fields(dialogInstance) {
+    get_variant_fields() {
       var variant_fields = [
         {
           fieldtype: "Section Break",
@@ -121,18 +153,20 @@
       return variant_fields;
     }
     country_changed() {
-      this.resetFieldsToBlank(["city", "state"]);
-    }
-    resetFieldsToBlank(fieldNames) {
+      const fieldNames = ["city", "state"];
       if (this.dialog) {
         fieldNames.forEach((fieldName) => {
           if (this.dialog.fields_dict[fieldName]) {
             this.dialog.set_value(fieldName, "");
+          } else {
+            console.warn(`Field ${fieldName} does not exist in the dialog.`);
           }
         });
+      } else {
+        console.error("Dialog is not defined.");
       }
     }
   };
   frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.ContactQEntry;
 })();
-//# sourceMappingURL=futilitap.bundle.WEGWFLNW.js.map
+//# sourceMappingURL=futilitap.bundle.GTO2U7RH.js.map

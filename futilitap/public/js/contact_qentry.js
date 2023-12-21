@@ -16,33 +16,49 @@ frappe.ui.form.ContactQEntry = class ContactQEntry extends frappe.ui.form.QuickE
         };
 
         // Filter cities based on country
-        this.dialog.fields_dict['city'].get_query = () => {
+		this.dialog.fields_dict['city'].get_query = () => {
 			let country = this.dialog.get_value('country');
-            return {
-                filters: { "country": country }
-            };
-        };
+			// Check if country is selected
+			if (!country) {
+				frappe.msgprint(__('Please select a country first.'));
+				return;
+			}
+			return {
+				filters: { "country": country }
+			};
+		};
 
 		// onchange handler for city
 		this.dialog.fields_dict.city.df.onchange = () => {
 			let cityName = this.dialog.get_value('city');
-			if (cityName) {
-				// Fetch city details
-				frappe.db.get_doc('FUA City', cityName)
-					.then(city => {
-						// Set the state value in the dialog
-						if (city && city.state) {
-							this.dialog.set_value('state', city.state);
-						}
-					});
+			if (!cityName) {
+				// Clear the state field if no city is selected
+				this.dialog.set_value('state', '');
+				return;
 			}
-		};
-		
+	
+			// Fetch city details
+			frappe.db.get_doc('FUA City', cityName)
+				.then(city => {
+					// Check if city document has a state field
+					if (city && city.state) {
+						// Set the state value in the dialog
+						this.dialog.set_value('state', city.state);
+					} else {
+						// Handle cases where state is not set for the city
+						this.dialog.set_value('state', '');
+						frappe.msgprint(__('State information not available for the selected city.'));
+					}
+				})
+				.catch(() => {
+					// Error handling for failed request
+					frappe.msgprint(__('Failed to fetch details for the selected city.'));
+				});
+		};		
 
 	}
 
-
-	get_variant_fields(dialogInstance) {
+	get_variant_fields() {
 		var variant_fields = [{
 			fieldtype: "Section Break",
 			label: __("Primary Contact Details"),
@@ -115,16 +131,24 @@ frappe.ui.form.ContactQEntry = class ContactQEntry extends frappe.ui.form.QuickE
 	}
 
 	country_changed() {
-		this.resetFieldsToBlank(['city', 'state']);
-	}
+		// Define the fields to reset
+		const fieldNames = ['city', 'state'];
 
-	resetFieldsToBlank(fieldNames) {
+		// Check if the dialog is present
 		if (this.dialog) {
 			fieldNames.forEach(fieldName => {
+				// Check if the field exists in the dialog
 				if (this.dialog.fields_dict[fieldName]) {
+					// Reset the field to blank
 					this.dialog.set_value(fieldName, '');
+				} else {
+					// Optionally log or handle the case where a field does not exist
+					console.warn(`Field ${fieldName} does not exist in the dialog.`);
 				}
 			});
+		} else {
+			// Handle the case where the dialog is not defined
+			console.error('Dialog is not defined.');
 		}
 	}
 }
