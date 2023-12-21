@@ -169,4 +169,4 @@
   };
   frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.ContactQEntry;
 })();
-//# sourceMappingURL=futilitap.bundle.GTO2U7RH.js.map
+//# sourceMappingURL=futilitap.bundle.SHOSKII3.js.map
