@@ -8,6 +8,8 @@ So far, the application only changes 3 fields in the **Address** DocType using *
 
 1.  City - to be a Link field to a list of cities is provided in the **FUA City** DocType.
 
+	- City **Title Field** is set to **City, State Abbreviation** in case of town/city names similarities in different country subdivisions.
+
 2.  State - to be a Link field to a list of states is provided in the **FUA State** DocType.
 
 3.  County - to be a Link field to a list of counties is provided in the **FUA County** DocType.
