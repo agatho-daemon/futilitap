@@ -24,6 +24,30 @@ bench get-app --branch main https://github.com/agatho-daemon/futilitap.git
 bench --site [site-name] install-app futilitap
 ```
 
+### NOTES
+
+1.	Since City, County, and State are now Link fields, the Address Template will display the document name instead of the city, county, and state names.
+
+	Therefore, the Jinja Address Template have to be modified to have these fields pulled from the linked documents using the `set` property and `frappe.db.get_value()` function. Notice lines 5 and 8 in the example below:
+
+```jinja
+	{{ address_line1 }}<br>
+	{% if address_line2 %}{{ address_line2 }}<br>{% endif -%}
+	{{ address_line1 }}<br>
+	{% if address_line2 %}{{ address_line2 }}<br>{% endif -%}
+	{% set city = frappe.db.get_value('FUA City', city, ['city_name']) %}
+	{{ city }}<br>
+	{% if state %}
+	{% set state = frappe.db.get_value('FUA State', state, ['state_name']) %}
+	{{ state }}<br>{% endif -%}
+	{% if pincode %}{{ pincode }}<br>{% endif -%}
+	{{ country }}<br>
+	<br>
+	{% if phone %}{{ _("Phone") }}: {{ phone }}<br>{% endif -%}
+	{% if fax %}{{ _("Fax") }}: {{ fax }}<br>{% endif -%}
+	{% if email_id %}{{ _("Email") }}: {{ email_id }}<br>{% endif -%}
+```
+
 #### License
 
 cc0-1.0
