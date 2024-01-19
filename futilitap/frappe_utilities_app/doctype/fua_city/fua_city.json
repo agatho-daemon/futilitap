@@ -26,11 +26,13 @@
   {
    "fieldname": "city_abbreviation",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "City Abbreviation"
   },
   {
    "fieldname": "state",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "State",
    "options": "FUA State"
   },
@@ -55,7 +57,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-19 07:57:31.804943",
+ "modified": "2024-01-19 09:20:49.769267",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA City",

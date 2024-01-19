@@ -15,7 +15,6 @@
   {
    "fieldname": "state_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "State Name",
    "reqd": 1,
    "unique": 1
@@ -23,6 +22,7 @@
   {
    "fieldname": "state_abbreviation",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "State Abbreviation"
   },
   {
@@ -34,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-19 06:56:22.226019",
+ "modified": "2024-01-19 09:21:47.157656",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA State",
