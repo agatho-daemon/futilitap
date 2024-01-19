@@ -2,12 +2,11 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "field:state_name",
  "creation": "2023-12-17 10:25:10.466294",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "state_name",
   "state_abbreviation",
   "country"
@@ -27,15 +26,6 @@
    "label": "State Abbreviation"
   },
   {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Series",
-   "no_copy": 1,
-   "options": "STATE-\nPROV-\nGOVR-",
-   "set_only_once": 1,
-   "sort_options": 1
-  },
-  {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
@@ -44,11 +34,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 14:42:45.699626",
+ "modified": "2024-01-19 06:56:22.226019",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA State",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -64,9 +54,7 @@
    "write": 1
   }
  ],
- "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "title_field": "state_name"
+ "states": []
 }

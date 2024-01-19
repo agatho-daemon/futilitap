@@ -2,12 +2,11 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "naming_series:",
+ "autoname": "field:county_name",
  "creation": "2023-12-17 10:34:16.497384",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "county_name",
   "county_abbreviation",
   "country"
@@ -18,21 +17,13 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "County Name",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "county_abbreviation",
    "fieldtype": "Data",
    "label": "County Abbreviation"
-  },
-  {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Series",
-   "no_copy": 1,
-   "options": "CNTY-\nMUNI-",
-   "set_only_once": 1,
-   "sort_options": 1
   },
   {
    "fieldname": "country",
@@ -43,11 +34,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-17 17:05:32.990052",
+ "modified": "2024-01-19 06:58:26.367056",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA County",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -63,9 +54,7 @@
    "write": 1
   }
  ],
- "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "title_field": "county_name"
+ "states": []
 }
