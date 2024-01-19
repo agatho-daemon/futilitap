@@ -26,27 +26,11 @@ bench --site [site-name] install-app futilitap
 
 ### NOTES
 
-1.	Since City, County, and State are now Link fields, the Address Template will display the document name instead of the city, county, and state names.
+Due to complexitiesconsequences introduced by using Nameing Series for FUA City, FUA State, and FUA County, the Naming is reverted to the Name of the City/Town, State/Province, and County. You can disregard teh below note.
 
-	Therefore, the Jinja Address Template have to be modified to have these fields pulled from the linked documents using the `set` property and `frappe.db.get_value()` function. Notice lines 5 and 8 in the example below:
+~~Since City, County, and State are now Link fields, the Address Template will display the document name instead of the city, county, and state names.~~
 
-```jinja
-	{{ address_line1 }}<br>
-	{% if address_line2 %}{{ address_line2 }}<br>{% endif -%}
-	{{ address_line1 }}<br>
-	{% if address_line2 %}{{ address_line2 }}<br>{% endif -%}
-	{% set city = frappe.db.get_value('FUA City', city, ['city_name']) %}
-	{{ city }}<br>
-	{% if state %}
-	{% set state = frappe.db.get_value('FUA State', state, ['state_name']) %}
-	{{ state }}<br>{% endif -%}
-	{% if pincode %}{{ pincode }}<br>{% endif -%}
-	{{ country }}<br>
-	<br>
-	{% if phone %}{{ _("Phone") }}: {{ phone }}<br>{% endif -%}
-	{% if fax %}{{ _("Fax") }}: {{ fax }}<br>{% endif -%}
-	{% if email_id %}{{ _("Email") }}: {{ email_id }}<br>{% endif -%}
-```
+~~Therefore, the Jinja Address Template have to be modified to have these fields pulled from the linked documents using the `set` property and `frappe.db.get_value()` function. Notice lines 5 and 8 in the example below:~~
 
 #### License
 
