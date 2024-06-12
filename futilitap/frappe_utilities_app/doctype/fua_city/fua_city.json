@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:city_name",
@@ -18,7 +19,6 @@
   {
    "fieldname": "city_name",
    "fieldtype": "Data",
-   "in_list_view": 0,
    "label": "City Name",
    "reqd": 1,
    "unique": 1
@@ -57,7 +57,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-19 09:25:33.259403",
+ "modified": "2024-06-12 06:17:45.513386",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA City",
@@ -75,6 +75,15 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "share": 1
   }
  ],
  "sort_field": "modified",
