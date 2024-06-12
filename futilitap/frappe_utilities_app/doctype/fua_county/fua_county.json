@@ -34,7 +34,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 11:32:27.524603",
+ "modified": "2024-06-12 06:19:46.283060",
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA County",
@@ -60,6 +60,24 @@
    "read": 1,
    "report": 1,
    "role": "Sales User",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Master Manager",
    "share": 1
   }
  ],
