@@ -4,4 +4,7 @@
 *.swp
 tags
 node_modules
+*.bundle.*.js
+*.bundle.*.css
+*.bundle.*.js.map
 __pycache__
