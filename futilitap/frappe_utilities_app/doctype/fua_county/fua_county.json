@@ -2,34 +2,41 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:county_name",
  "creation": "2023-12-17 10:34:16.497384",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "county_name",
   "county_abbreviation",
+  "state",
   "country"
  ],
  "fields": [
   {
    "fieldname": "county_name",
    "fieldtype": "Data",
-   "label": "County Name",
-   "reqd": 1,
-   "unique": 1
+   "label": "County / District Name",
+   "reqd": 1
   },
   {
    "fieldname": "county_abbreviation",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "County Abbreviation"
+   "label": "County / District Abbreviation"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "State / Province / Region",
+   "options": "FUA State"
   },
   {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
-   "options": "Country"
+   "options": "Country",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -38,7 +45,7 @@
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA County",
- "naming_rule": "By fieldname",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
@@ -81,7 +88,10 @@
    "share": 1
   }
  ],
+ "search_fields": "county_name,state,country",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "show_title_field_in_link": 1,
+ "states": [],
+ "title_field": "county_name"
 }

@@ -4,30 +4,30 @@ app_publisher = "Ismail Tabtabai"
 app_description = "Utilities for common use in cases asked about in the forums"
 app_email = "ismail@tabtabai.org"
 app_license = "cc0-1.0"
-# required_apps = []
+required_apps = ["frappe", "erpnext"]
 
 # Fixtures
 fixtures = [
-    # Property Setters
-    {
-        "dt": "Property Setter",
-        "filters": [
-            [
-                "name",
-                "in",
-                [
-                    "Address-city-fieldtype",
-                    "Address-county-fieldtype",
-                    "Address-state-fieldtype",
-                    "Address-city-options",
-                    "Address-county-options",
-                    "Address-state-options",
-                    "Address-city-in_standard_filter",
-                    "Address-main-field_order",
-                ]
-            ]
-        ]
-    },
+	# Property Setters
+	{
+		"dt": "Property Setter",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"Address-city-fieldtype",
+					"Address-county-fieldtype",
+					"Address-state-fieldtype",
+					"Address-city-options",
+					"Address-county-options",
+					"Address-state-options",
+					"Address-city-in_standard_filter",
+					"Address-main-field_order",
+				],
+			]
+		],
+	},
 ]
 
 
@@ -77,7 +77,7 @@ app_include_js = "futilitap.bundle.js"
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# "Role": "home_page"
 # }
 
 # Generators
@@ -91,8 +91,8 @@ app_include_js = "futilitap.bundle.js"
 
 # add methods and filters to jinja environment
 # jinja = {
-#	"methods": "futilitap.utils.jinja_methods",
-#	"filters": "futilitap.utils.jinja_filters"
+# "methods": "futilitap.utils.jinja_methods",
+# "filters": "futilitap.utils.jinja_filters"
 # }
 
 # Installation
@@ -134,11 +134,11 @@ app_include_js = "futilitap.bundle.js"
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-#	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
+# "Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
 # has_permission = {
-#	"Event": "frappe.desk.doctype.event.event.has_permission",
+# "Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
 # DocType Class
@@ -146,7 +146,7 @@ app_include_js = "futilitap.bundle.js"
 # Override standard doctype classes
 
 # override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
+# "ToDo": "custom_app.overrides.CustomToDo"
 # }
 
 # Document Events
@@ -154,32 +154,32 @@ app_include_js = "futilitap.bundle.js"
 # Hook on document methods and events
 
 # doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
+# "*": {
+# "on_update": "method",
+# "on_cancel": "method",
+# "on_trash": "method"
+# }
 # }
 
 # Scheduled Tasks
 # ---------------
 
 # scheduler_events = {
-#	"all": [
-#		"futilitap.tasks.all"
-#	],
-#	"daily": [
-#		"futilitap.tasks.daily"
-#	],
-#	"hourly": [
-#		"futilitap.tasks.hourly"
-#	],
-#	"weekly": [
-#		"futilitap.tasks.weekly"
-#	],
-#	"monthly": [
-#		"futilitap.tasks.monthly"
-#	],
+# "all": [
+# "futilitap.tasks.all"
+# ],
+# "daily": [
+# "futilitap.tasks.daily"
+# ],
+# "hourly": [
+# "futilitap.tasks.hourly"
+# ],
+# "weekly": [
+# "futilitap.tasks.weekly"
+# ],
+# "monthly": [
+# "futilitap.tasks.monthly"
+# ],
 # }
 
 # Testing
@@ -191,14 +191,14 @@ app_include_js = "futilitap.bundle.js"
 # ------------------------------
 #
 # override_whitelisted_methods = {
-#	"frappe.desk.doctype.event.event.get_events": "futilitap.event.get_events"
+# "frappe.desk.doctype.event.event.get_events": "futilitap.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-#	"Task": "futilitap.task.get_dashboard_data"
+# "Task": "futilitap.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -224,37 +224,36 @@ app_include_js = "futilitap.bundle.js"
 # --------------------
 
 # user_data_fields = [
-#	{
-#		"doctype": "{doctype_1}",
-#		"filter_by": "{filter_by}",
-#		"redact_fields": ["{field_1}", "{field_2}"],
-#		"partial": 1,
-#	},
-#	{
-#		"doctype": "{doctype_2}",
-#		"filter_by": "{filter_by}",
-#		"partial": 1,
-#	},
-#	{
-#		"doctype": "{doctype_3}",
-#		"strict": False,
-#	},
-#	{
-#		"doctype": "{doctype_4}"
-#	}
+# {
+# "doctype": "{doctype_1}",
+# "filter_by": "{filter_by}",
+# "redact_fields": ["{field_1}", "{field_2}"],
+# "partial": 1,
+# },
+# {
+# "doctype": "{doctype_2}",
+# "filter_by": "{filter_by}",
+# "partial": 1,
+# },
+# {
+# "doctype": "{doctype_3}",
+# "strict": False,
+# },
+# {
+# "doctype": "{doctype_4}"
+# }
 # ]
 
 # Authentication and authorization
 # --------------------------------
 
 # auth_hooks = [
-#	"futilitap.auth.validate"
+# "futilitap.auth.validate"
 # ]
 
 # Automatically update python controller files with type annotations for this app.
 # export_python_type_annotations = True
 
 # default_log_clearing_doctypes = {
-#	"Logging DocType Name": 30  # days to retain logs
+# "Logging DocType Name": 30  # days to retain logs
 # }
-

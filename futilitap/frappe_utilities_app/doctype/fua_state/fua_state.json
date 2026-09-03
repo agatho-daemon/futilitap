@@ -2,7 +2,6 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "field:state_name",
  "creation": "2023-12-17 10:25:10.466294",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -15,21 +14,22 @@
   {
    "fieldname": "state_name",
    "fieldtype": "Data",
-   "label": "State Name",
-   "reqd": 1,
-   "unique": 1
+   "label": "State / Province / Region Name",
+   "reqd": 1
   },
   {
    "fieldname": "state_abbreviation",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "State Abbreviation"
+   "label": "Region Abbreviation"
   },
   {
    "fieldname": "country",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Country",
-   "options": "Country"
+   "options": "Country",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -38,7 +38,7 @@
  "modified_by": "Administrator",
  "module": "Frappe Utilities App",
  "name": "FUA State",
- "naming_rule": "By fieldname",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {
@@ -81,7 +81,10 @@
    "share": 1
   }
  ],
+ "search_fields": "state_name,country",
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "show_title_field_in_link": 1,
+ "states": [],
+ "title_field": "state_name"
 }

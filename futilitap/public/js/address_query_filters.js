@@ -1,61 +1,92 @@
-// Description: Query filters for Address doctype.
-// Author: Ismail Tabtabai
-// Version: 0.0.1
-// Last Update: 2023-12-17
+// Country-aware query filters for the standard Address DocType.
 
-frappe.provide('frappe.ui.form');
+frappe.provide("frappe.ui.form");
 
-frappe.ui.form.on('Address', {
-    country: function(frm) {
-        if (!frm.doc.country) {
-            // Clear the dependent fields only if country is cleared
-            ['city', 'county', 'state', 'pincode'].forEach(field => {
-                frm.set_value(field, "");
-            });
-            return;
-        }
+function set_geography_queries(frm) {
+  const geography_doctypes = {
+    city: "FUA City",
+    county: "FUA County",
+    state: "FUA State",
+  };
 
-        // Trigger change events for each field to set the query filters
-        ['city', 'county', 'state', 'pincode'].forEach(field => {
-            frm.trigger(field);
-        });
+  Object.entries(geography_doctypes).forEach(([fieldname, doctype]) => {
+    frm.set_query(fieldname, () => ({
+      filters: { country: frm.doc.country || "" },
+    }));
 
-        // Function to set common query based on country
-        function set_common_query(field_name) {
-            frm.set_query(field_name, function() {
-                return {
-                    filters: {
-                        'country': frm.doc.country
-                    }
-                };
-            });
-        }
+    // Property Setters normally supply this; retaining it here makes the
+    // client behavior safe while fixtures are being synchronized.
+    if (frm.fields_dict[fieldname]?.df) {
+      frm.fields_dict[fieldname].df.options = doctype;
+    }
+  });
+}
 
-        // Filter City, County, and State fields based on Country field
-        ['city', 'county', 'state'].forEach(set_common_query);
-    },
+frappe.ui.form.on("Address", {
+  setup(frm) {
+    set_geography_queries(frm);
+  },
 
-    city: function(frm) {
-        if (!frm.doc.city) {
-            // Clear the state field if no city is selected
-            frm.set_value('state', '');
-            return;
-        }
-        // Fetch city details
-        frappe.db.get_value('FUA City', {'name': frm.doc.city}, 'state')
-            .then(r => {
-                // Set the state value in the dialog
-                if (r && r.message && r.message.state) {
-                    frm.set_value('state', r.message.state);
-                } else {
-                    frappe.msgprint(__("State not found for city {0}", frm.doc.city));
-                    frm.set_value('state', "");
-                }
-            })
-            .catch(err => {
-                frm.set_value('state', "");
-                frappe.msgprint(__("Error fetching city details: {0}", err));
-                console.error("Error fetching city {0} details: ", frm.doc.city, err);
-            });
-    },
+  refresh(frm) {
+    set_geography_queries(frm);
+  },
+
+  async country(frm) {
+    set_geography_queries(frm);
+
+    const values = { city: "", county: "", state: "" };
+    if (!frm.doc.country) {
+      values.pincode = "";
+    }
+    await frappe.model.set_value(frm.doctype, frm.docname, values);
+  },
+
+  async city(frm) {
+    if (!frm.doc.city) {
+      await frappe.model.set_value(frm.doctype, frm.docname, {
+        county: "",
+        state: "",
+      });
+      return;
+    }
+
+    try {
+      const { message } = await frappe.db.get_value("FUA City", frm.doc.city, [
+        "country",
+        "county",
+        "state",
+      ]);
+
+      if (!message) {
+        frappe.msgprint(
+          __("Geographic details were not found for city {0}.", [frm.doc.city])
+        );
+        return;
+      }
+
+      if (
+        message.country &&
+        frm.doc.country &&
+        message.country !== frm.doc.country
+      ) {
+        frappe.msgprint(
+          __("City {0} does not belong to the selected country.", [
+            frm.doc.city,
+          ])
+        );
+        await frm.set_value("city", "");
+        return;
+      }
+
+      await frappe.model.set_value(frm.doctype, frm.docname, {
+        county: message.county || "",
+        state: message.state || "",
+      });
+    } catch (error) {
+      console.error("Unable to load FUA City geographic details", error);
+      frappe.msgprint(
+        __("Unable to load geographic details for the selected city.")
+      );
+    }
+  },
 });

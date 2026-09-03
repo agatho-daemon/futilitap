@@ -1,37 +1,43 @@
 ## Frappe Utilities Application
 
-A Placeholder application for commonly attempted or asked about howtos in the forums.
+Futilitap provides reusable, country-neutral geographic master data for Frappe and ERPNext v16.
 
-#### Features
+### Geographic masters
 
-So far, the application only changes 3 fields in the **Address** DocType using **Property Setter**, namly:
+- **FUA City** stores cities and towns, with optional county/district, state/province/region,
+  ERPNext Territory, abbreviation, and Country links.
+- **FUA State** stores first-level administrative regions such as states, provinces,
+  governorates, regions, and territories.
+- **FUA County** stores optional county, district, or equivalent subdivisions.
 
-1.  City - to be a Link field to a list of cities is provided in the **FUA City** DocType.
+The `FUA` prefix is retained to keep the DocType names unique across installed Frappe apps.
+Labels remain generic so each site can enter the geographic hierarchy used by its countries.
+Existing document IDs remain unchanged. New records use the plain geographic name as their ID
+when it is available. Only a conflicting name receives a readable parent suffix, such as
+`Springfield-Illinois-United States`. Links continue to display the familiar geographic name.
 
-	- City **Title Field** is set to **City, State Abbreviation** in case of town/city names similarities in different country subdivisions.
+### Address integration
 
-2.  State - to be a Link field to a list of states is provided in the **FUA State** DocType.
+Property Setters change the standard Address `city`, `county`, and `state` fields into links to
+the corresponding FUA masters. Address queries are filtered by Country, and selecting a city
+fills its configured county/district and state/province/region.
 
-3.  County - to be a Link field to a list of counties is provided in the **FUA County** DocType.
+Futilitap does not replace ERPNext's native Customer Quick Entry form. Regional presentation
+and address-entry behavior belongs in regional applications such as `erpnext_kwt`.
 
-It also allows the user to search **Address** for a city by name and select it from the list of cities.
+### Requirements
 
-#### Installation
+- Frappe 16
+- ERPNext 16
+- Python 3.14
+
+### Installation
 
 ```bash
 bench get-app --branch main https://github.com/agatho-daemon/futilitap.git
-
 bench --site [site-name] install-app futilitap
 ```
 
-### NOTES
+### License
 
-Due to complexitiesconsequences introduced by using Nameing Series for FUA City, FUA State, and FUA County, the Naming is reverted to the Name of the City/Town, State/Province, and County. You can disregard teh below note.
-
-~~Since City, County, and State are now Link fields, the Address Template will display the document name instead of the city, county, and state names.~~
-
-~~Therefore, the Jinja Address Template have to be modified to have these fields pulled from the linked documents using the `set` property and `frappe.db.get_value()` function. Notice lines 5 and 8 in the example below:~~
-
-#### License
-
-cc0-1.0
+CC0-1.0
