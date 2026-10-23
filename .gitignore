@@ -4,6 +4,7 @@
 *.swp
 tags
 node_modules
+/futilitap/public/dist/
 *.bundle.*.js
 *.bundle.*.css
 *.bundle.*.js.map
